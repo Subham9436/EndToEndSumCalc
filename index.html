@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1" />
+    <title>Sum Calculator</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <form>
+      <h1 id="calc-title" class="title">Fuel Sum Calculator</h1>
+      <div class="input-group">
+        <label for="first-number">1st Number</label>
+        <input id="firstNumber" type="text" placeholder="1st Number" />
+      </div>
+      <br />
+      <div class="input-group">
+        <label for="second-number">2nd Number</label>
+        <input id="secondNumber" type="text" placeholder="2nd Number" />
+      </div>
+      <br />
+
+      <div>
+        <button id="button" type="button" onclick="populatediv()">
+          Calculate Sum
+        </button>
+      </div>
+
+      <div
+        id="finalSum"
+        class="result"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
+    </form>
+
+    <script>
+      function populatediv() {
+        const a = document.getElementById("firstNumber").value;
+        const b = document.getElementById("secondNumber").value;
+        //const element = document.getElementById("finalSum");
+        //element.innerHTML = `Sum is ${parseInt(a) + parseInt(b)}`;
+        fetch("http://localhost:3000/Add?a=" + a + "&b=" + b).then(function (
+          response
+        ) {
+          response.text().then(function (ans) {
+            console.log(ans);
+            document.getElementById("finalSum").innerHTML = `Sum is ${ans}`;
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
